@@ -32,7 +32,7 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           action: "fix"
-          workspace: "\"Project Collection.sln\""
+          workspace: "Solution.sln"
           only-changed-files: true
 
       - name: Commit files
