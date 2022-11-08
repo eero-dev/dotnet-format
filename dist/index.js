@@ -10871,7 +10871,6 @@ exports.format = void 0;
 const core_1 = __nccwpck_require__(2186);
 const exec_1 = __nccwpck_require__(1514);
 const github_1 = __nccwpck_require__(5438);
-const io_1 = __nccwpck_require__(7436);
 const files_1 = __nccwpck_require__(7255);
 const console_1 = __nccwpck_require__(6206);
 function formatOnlyChangedFiles(onlyChangedFiles) {
@@ -10917,16 +10916,15 @@ function format(options) {
             dotnetFormatOptions.push("whitespace");
         }
         if (options.fixAnalyzersLevel !== undefined && options.fixAnalyzersLevel != "") {
-            dotnetFormatOptions.push("analyzers", options.fixAnalyzersLevel);
+            dotnetFormatOptions.push("analyzers --severity", options.fixAnalyzersLevel);
         }
         if (options.fixStyleLevel !== undefined && options.fixStyleLevel != "") {
-            dotnetFormatOptions.push("style", options.fixStyleLevel);
+            dotnetFormatOptions.push("style --severity", options.fixStyleLevel);
         }
         if (options.logLevel !== undefined && options.logLevel != "") {
             dotnetFormatOptions.push("--verbosity", options.logLevel);
         }
-        const dotnetPath = yield (0, io_1.which)("dotnet", true);
-        const dotnetResult = yield (0, exec_1.exec)(`"${dotnetPath}"`, dotnetFormatOptions, execOptions);
+        const dotnetResult = yield (0, exec_1.exec)("dotnet", dotnetFormatOptions, execOptions);
         if (dotnetResult === 1) {
             (0, core_1.setFailed)("Formatting failed");
         }

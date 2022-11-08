@@ -74,19 +74,18 @@ export async function format(options: FormatOptions): Promise<boolean> {
   }
 
   if (options.fixAnalyzersLevel !== undefined && options.fixAnalyzersLevel != "") {
-    dotnetFormatOptions.push("analyzers", options.fixAnalyzersLevel);
+    dotnetFormatOptions.push("analyzers --severity", options.fixAnalyzersLevel);
   }
 
   if (options.fixStyleLevel !== undefined && options.fixStyleLevel != "") {
-    dotnetFormatOptions.push("style", options.fixStyleLevel);
+    dotnetFormatOptions.push("style --severity", options.fixStyleLevel);
   }
 
   if (options.logLevel !== undefined && options.logLevel != "") {
     dotnetFormatOptions.push("--verbosity", options.logLevel);
   }
 
-  const dotnetPath: string = await which("dotnet", true);
-  const dotnetResult = await exec(`"${dotnetPath}"`, dotnetFormatOptions, execOptions);
+  const dotnetResult = await exec("dotnet", dotnetFormatOptions, execOptions);
 
   if (dotnetResult === 1) {
     setFailed("Formatting failed");
