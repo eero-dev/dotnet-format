@@ -9,7 +9,6 @@ import { error } from "console";
 
 export interface FormatOptions {
   onlyChangedFiles: boolean;
-  workspaceIsFolder?: boolean;
   dryRun?: boolean;
   workspace?: string;
   include?: string;
@@ -43,11 +42,9 @@ export async function format(options: FormatOptions): Promise<boolean> {
   const dotnetFormatOptions = ["format"];
 
   if (options.workspace !== undefined && options.workspace != "") {
-    if (options.workspaceIsFolder) {
-      dotnetFormatOptions.push("--folder");
-    }
-    
     dotnetFormatOptions.push(options.workspace);
+  } else {
+    setFailed("Specify PROJECT | SOLUTION, .sln or .csproj");
   }
 
   if (options.dryRun) {
@@ -64,7 +61,6 @@ export async function format(options: FormatOptions): Promise<boolean> {
       debug("No files found for formatting");
       return false;
     }
-    dotnetFormatOptions.push("--folder");
 
     dotnetFormatOptions.push("--include", filesToCheck.join(" "));
   }

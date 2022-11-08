@@ -10796,7 +10796,6 @@ function buildOptions() {
     const onlyChangedFiles = (0, core_1.getInput)("only-changed-files") === "true";
     const include = (0, core_1.getInput)("include");
     const workspace = (0, core_1.getInput)("workspace");
-    const workspaceIsFolder = (0, core_1.getInput)("workspaceIsFolder") === "true";
     const exclude = (0, core_1.getInput)("exclude");
     const logLevel = (0, core_1.getInput)("log-level");
     const fixWhitespace = (0, core_1.getInput)("fix-whitespace") === "true";
@@ -10804,7 +10803,6 @@ function buildOptions() {
     const fixStyleLevel = (0, core_1.getInput)("fix-style-level");
     const formatOptions = {
         onlyChangedFiles,
-        workspaceIsFolder,
         fixWhitespace,
     };
     if (include !== undefined && include != "") {
@@ -10894,10 +10892,10 @@ function format(options) {
         };
         const dotnetFormatOptions = ["format"];
         if (options.workspace !== undefined && options.workspace != "") {
-            if (options.workspaceIsFolder) {
-                dotnetFormatOptions.push("--folder");
-            }
             dotnetFormatOptions.push(options.workspace);
+        }
+        else {
+            (0, core_1.setFailed)("Specify PROJECT | SOLUTION, .sln or .csproj");
         }
         if (options.dryRun) {
             dotnetFormatOptions.push("--verify-no-changes");
@@ -10910,7 +10908,6 @@ function format(options) {
                 (0, core_1.debug)("No files found for formatting");
                 return false;
             }
-            dotnetFormatOptions.push("--folder");
             dotnetFormatOptions.push("--include", filesToCheck.join(" "));
         }
         if (options.exclude !== undefined && options.exclude != "") {

@@ -32,16 +32,11 @@ inputs:
     default: "true"
 
   workspace:
-    description: "The solution or project file to operate on. In case you want to process all files in a certain folder, set the root folder here and specify the `workspaceIsFolder` option."
-    required: false
-
-  workspaceIsFolder:
-    description: "Specifies if the value in `workspace` has to be treated as a simple folder. If true, set `workspace` to the root folder you want to process."
-    required: false
-    default: "false"
+    description: "The solution or project file to operate on."
+    required: true
 
   include:
-    description: "The files to include, delimited by space. Cannot be used together with the `workspace` option."
+    description: "The files to include, delimited by space."
     required: false
 
   exclude:
@@ -60,7 +55,7 @@ inputs:
     description: "Fixes styles according to formating rules."
     required: false
 
-  logLevel:
+  log-level:
     description: "Sets the logging verbosity of the dotnet format process. Allowed values are q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]"
     required: false
 

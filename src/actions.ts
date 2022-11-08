@@ -6,7 +6,6 @@ function buildOptions(): FormatOptions {
   const onlyChangedFiles = getInput("only-changed-files") === "true";
   const include: string = getInput("include");
   const workspace: string = getInput("workspace");
-  const workspaceIsFolder = getInput("workspaceIsFolder") === "true";
   const exclude: string = getInput("exclude");
   const logLevel: string = getInput("log-level");
   const fixWhitespace = getInput("fix-whitespace") === "true";
@@ -15,7 +14,6 @@ function buildOptions(): FormatOptions {
 
   const formatOptions: FormatOptions = {
     onlyChangedFiles,
-    workspaceIsFolder,
     fixWhitespace,
   };
 
