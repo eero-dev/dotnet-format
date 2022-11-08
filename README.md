@@ -1,6 +1,6 @@
 # GitHub Action for dotnet-format
 
-[![CI Workflow Status](https://github.com/jfversluis/dotnet-format/workflows/CI/badge.svg)](https://github.com/jfversluis/dotnet-format/actions?query=workflow%3ACI)
+[![CI Workflow Status](https://github.com/eero-dev/dotnet-format/workflows/CI/badge.svg)](https://github.com/eero-dev/dotnet-format/actions?query=workflow%3ACI)
 
 Run [dotnet-format](https://github.com/dotnet/format) as part of your workflow to report formatting errors or auto fix violations as part of your pull request workflow.
 
@@ -137,4 +137,4 @@ The scripts and documentation in this project are released under the [MIT Licens
 
 ## Acknowledgements
 
-Thank you @victor-alcazar and @xt0rted for the first versions that I have forked this from
+Thank you @victor-alcazar, @xt0rted and @jfversluis for the first versions that I have forked this from
