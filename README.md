@@ -2,7 +2,7 @@
 
 [![CI Workflow Status](https://github.com/eero-dev/dotnet-format/workflows/CI/badge.svg)](https://github.com/eero-dev/dotnet-format/actions?query=workflow%3ACI)
 
-Run [dotnet-format](https://github.com/dotnet/format) as part of your workflow to report formatting errors or auto fix violations as part of your pull request workflow.
+Run [dotnet format](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-format) as part of your workflow to report formatting errors or auto fix violations as part of your pull request workflow.
 
 ## Usage
 
