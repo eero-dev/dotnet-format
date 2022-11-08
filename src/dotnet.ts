@@ -92,6 +92,10 @@ export async function format(options: FormatOptions): Promise<boolean> {
   const dotnetPath: string = await which("dotnet", true);
   const dotnetResult = await exec(`"${dotnetPath}"`, dotnetFormatOptions, execOptions);
 
+  if (dotnetResult === 1) {
+    setFailed("Formatting failed");
+  }
+
   // When NOT doing only a dry-run we inspect the actual changed files
   if (!options.dryRun) {
     info("Checking changed files");
