@@ -44,14 +44,14 @@ export async function format(options: FormatOptions): Promise<boolean> {
 
   if (options.workspace !== undefined && options.workspace != "") {
     if (options.workspaceIsFolder) {
-      dotnetFormatOptions.push("-f");
+      dotnetFormatOptions.push("--folder");
     }
     
     dotnetFormatOptions.push(options.workspace);
   }
 
   if (options.dryRun) {
-    dotnetFormatOptions.push("--check");
+    dotnetFormatOptions.push("--verify-no-changes");
   }
 
   if (formatOnlyChangedFiles(options.onlyChangedFiles)) {
@@ -64,7 +64,7 @@ export async function format(options: FormatOptions): Promise<boolean> {
       debug("No files found for formatting");
       return false;
     }
-    dotnetFormatOptions.push("-f");
+    dotnetFormatOptions.push("--folder");
 
     dotnetFormatOptions.push("--include", filesToCheck.join(" "));
   }
@@ -74,15 +74,15 @@ export async function format(options: FormatOptions): Promise<boolean> {
   }
 
   if (options.fixWhitespace) {
-    dotnetFormatOptions.push("--fix-whitespace");
+    dotnetFormatOptions.push("whitespace");
   }
 
   if (options.fixAnalyzersLevel !== undefined && options.fixAnalyzersLevel != "") {
-    dotnetFormatOptions.push("--fix-analyzers", options.fixAnalyzersLevel);
+    dotnetFormatOptions.push("analyzers", options.fixAnalyzersLevel);
   }
 
   if (options.fixStyleLevel !== undefined && options.fixStyleLevel != "") {
-    dotnetFormatOptions.push("--fix-style", options.fixStyleLevel);
+    dotnetFormatOptions.push("style", options.fixStyleLevel);
   }
 
   if (options.logLevel !== undefined && options.logLevel != "") {
