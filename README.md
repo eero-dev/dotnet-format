@@ -1,4 +1,4 @@
-# GitHub Action for dotnet-format
+# GitHub Action for dotnet format
 
 [![CI Workflow Status](https://github.com/eero-dev/dotnet-format/workflows/CI/badge.svg)](https://github.com/eero-dev/dotnet-format/actions?query=workflow%3ACI)
 
@@ -83,6 +83,14 @@ Name | Description
 
 ## Generating `dist/index.js`
 `npm run release`
+
+## Limitations
+Currently seems to only work under windows-latest container.
+Also some other issues:
+https://github.com/dotnet/format/issues/1378
+https://github.com/dotnet/format/issues/1479
+https://github.com/dotnet/format/issues/757
+
 
 ## License
 
