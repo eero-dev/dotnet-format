@@ -41,7 +41,7 @@ jobs:
           Co-authored-by: ${{ github.event.pull_request.user.login }} <${{ github.event.pull_request.user.id }}+${{ github.event.pull_request.user.login }}@users.noreply.github.com>'
       - name: Push changes
         if: steps.format.outputs.has-changes == 'true'
-        uses: ad-m/github-push-action@v0.5.0
+        uses: ad-m/github-push-action@552c074ed701137ebd2bf098e70c394ca293e87f
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.head_ref }}
