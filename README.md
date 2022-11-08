@@ -10,26 +10,29 @@ Run [dotnet-format](https://github.com/dotnet/format) as part of your workflow t
 Use this only when the PRs are coming from the same repository. You won't have permission to add commits to PRs coming from a forked repository.
 
 ```yml
-name: Format check on pull request
+nname: Format check on pull request
 on: pull_request
 jobs:
   dotnet-format:
     runs-on: windows-latest
     steps:
-      - name: Install dotnet-format
-        run: dotnet tool install -g dotnet-format
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
 
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
       - name: Run dotnet format
         id: format
-        uses: jfversluis/dotnet-format@v1.0.5
+        uses: eero-dev/dotnet-format@d3f2aef1dee3a6e6ed48183722e118ec24635a67
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           action: "fix"
+          workspace: "\"Project Collection.sln\""
           only-changed-files: true
 
       - name: Commit files
@@ -47,55 +50,6 @@ jobs:
           branch: ${{ github.head_ref }}
 
 ```
-
-### Scheduled daily at midnight (UTC) and open a PR with the fixes
-You should use this if you run a OSS project with outside contributors. You won't have permission to add commits to PRs coming from a forked repository.
-
-```yml
-name: Daily code format check
-on:
-  schedule:
-    - cron: 0 0 * * * # Every day at midnight (UTC)
-jobs:
-  dotnet-format:
-    runs-on: windows-latest
-    steps:
-      - name: Install dotnet-format
-        run: dotnet tool install -g dotnet-format
-
-      - name: Checkout repo
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
-
-      - name: Run dotnet format
-        id: format
-        uses: jfversluis/dotnet-format@v1.0.5
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          action: "fix"
-          workspace: "MySolution.sln"
-
-      - name: Commit files
-        if: steps.format.outputs.has-changes == 'true'
-        run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -a -m 'Automated dotnet-format update'
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          title: '[housekeeping] Automated PR to fix formatting errors'
-          body: |
-            Automated PR to fix formatting errors
-          committer: GitHub <noreply@github.com>
-          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-          labels: housekeeping
-          assignees: jfversluis
-          reviewers: jfversluis
-          branch: housekeeping/fix-codeformatting
-```
-
 ## Options
 
 ### Required
