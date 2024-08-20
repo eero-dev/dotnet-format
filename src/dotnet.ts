@@ -1,7 +1,6 @@
 import { debug, info, warning, setFailed } from "@actions/core";
 import { exec } from "@actions/exec";
 import { context } from "@actions/github";
-import { which } from "@actions/io";
 import { getPullRequestFiles } from "./files";
 
 import type { ExecOptions } from "@actions/exec/lib/interfaces";
